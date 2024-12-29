@@ -1,26 +1,28 @@
-from rest_framework import status
-from rest_framework.decorators import action
-from rest_framework.mixins import ListModelMixin
-from rest_framework.mixins import RetrieveModelMixin
-from rest_framework.mixins import UpdateModelMixin
-from rest_framework.response import Response
-from rest_framework.viewsets import GenericViewSet
+from django.shortcuts import get_object_or_404
+from ninja import Router
 
+from browniebrokedrftoninja.users.api.schema import UserSchema
 from browniebrokedrftoninja.users.models import User
 
-from .serializers import UserSerializer
+router = Router(tags=["users"])
 
 
-class UserViewSet(RetrieveModelMixin, ListModelMixin, UpdateModelMixin, GenericViewSet):
-    serializer_class = UserSerializer
-    queryset = User.objects.all()
-    lookup_field = "username"
+@router.get('/', response=list[UserSchema])
+def list_users(request):
+    users_qs = User.objects.filter(username=request.user.username)
+    return users_qs
 
-    def get_queryset(self, *args, **kwargs):
-        assert isinstance(self.request.user.id, int)
-        return self.queryset.filter(id=self.request.user.id)
 
-    @action(detail=False)
-    def me(self, request):
-        serializer = UserSerializer(request.user, context={"request": request})
-        return Response(status=status.HTTP_200_OK, data=serializer.data)
+@router.get('/{username}', response=UserSchema)
+def retrieve_user(request, username: str):
+    return get_object_or_404(User, username=username)
+
+
+@router.get('/me', response=UserSchema)
+def retrieve_current_user(request):
+    return request.user
+
+
+@router.patch('/{username}')
+def update_user(request, username: str, data: UserSchema):
+    ...
