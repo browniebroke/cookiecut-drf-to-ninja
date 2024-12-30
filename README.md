@@ -83,6 +83,6 @@ You must set the DSN url in production.
 
 The following details how to deploy this application.
 
-### Heroku
+### Docker
 
-See detailed [cookiecutter-django Heroku documentation](https://cookiecutter-django.readthedocs.io/en/latest/3-deployment/deployment-on-heroku.html).
+See detailed [cookiecutter-django Docker documentation](https://cookiecutter-django.readthedocs.io/en/latest/3-deployment/deployment-with-docker.html).
