@@ -208,11 +208,5 @@ sentry_sdk.init(
     traces_sample_rate=env.float("SENTRY_TRACES_SAMPLE_RATE", default=0.0),
 )
 
-# django-rest-framework
-# -------------------------------------------------------------------------------
-# Tools that generate code samples can use SERVERS to point to the correct domain
-SPECTACULAR_SETTINGS["SERVERS"] = [
-    {"url": "https://browniebrokedrftoninja.browniebroke.me", "description": "Production server"},
-]
 # Your stuff...
 # ------------------------------------------------------------------------------

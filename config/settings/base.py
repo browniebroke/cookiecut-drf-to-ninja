@@ -79,10 +79,7 @@ THIRD_PARTY_APPS = [
     "allauth.mfa",
     "allauth.socialaccount",
     "django_celery_beat",
-    "rest_framework",
-    "rest_framework.authtoken",
     "corsheaders",
-    "drf_spectacular",
 ]
 
 LOCAL_APPS = [
@@ -322,29 +319,8 @@ SOCIALACCOUNT_ADAPTER = "browniebrokedrftoninja.users.adapters.SocialAccountAdap
 # https://docs.allauth.org/en/latest/socialaccount/configuration.html
 SOCIALACCOUNT_FORMS = {"signup": "browniebrokedrftoninja.users.forms.UserSocialSignupForm"}
 
-# django-rest-framework
-# -------------------------------------------------------------------------------
-# django-rest-framework - https://www.django-rest-framework.org/api-guide/settings/
-REST_FRAMEWORK = {
-    "DEFAULT_AUTHENTICATION_CLASSES": (
-        "rest_framework.authentication.SessionAuthentication",
-        "rest_framework.authentication.TokenAuthentication",
-    ),
-    "DEFAULT_PERMISSION_CLASSES": ("rest_framework.permissions.IsAuthenticated",),
-    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
-}
-
 # django-cors-headers - https://github.com/adamchainz/django-cors-headers#setup
 CORS_URLS_REGEX = r"^/api/.*$"
 
-# By Default swagger ui is available only to admin user(s). You can change permission classes to change that
-# See more configuration options at https://drf-spectacular.readthedocs.io/en/latest/settings.html#settings
-SPECTACULAR_SETTINGS = {
-    "TITLE": "browniebrokedrftoninja API",
-    "DESCRIPTION": "Documentation of API endpoints of browniebrokedrftoninja",
-    "VERSION": "1.0.0",
-    "SERVE_PERMISSIONS": ["rest_framework.permissions.IsAdminUser"],
-    "SCHEMA_PATH_PREFIX": "/api/",
-}
 # Your stuff...
 # ------------------------------------------------------------------------------
